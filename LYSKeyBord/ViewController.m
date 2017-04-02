@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LYSNumPad.h"
+#import "LYSAlphaKeyBord.h"
 
 @interface ViewController()<UITextFieldDelegate>
 
@@ -31,7 +32,7 @@
         NSLog(@"value = %@",value);
     };
     UITextField *_txt = [[UITextField alloc]initWithFrame:CGRectMake(20, 100, CGRectGetWidth(self.view.frame) - 40, 40)];
-    _txt.inputView = _keyborder;
+    //_txt.inputView = _keyborder;
     _txt.placeholder = @"身份证键盘";
     //_txt.delegate = self;
     [self.view addSubview:_txt];
@@ -74,6 +75,22 @@
     _txt2.placeholder = @"默认键盘";
     //_txt.delegate = self;
     [self.view addSubview:_txt2];
+    
+    LYSAlphaKeyBord *_keyborder3 = [[LYSAlphaKeyBord alloc]init];
+    _keyborder3.sureBlock = ^(){
+        NSLog(@"LYSAlphaKeyBord sureBlock");
+    };
+    _keyborder3.deleteBlock = ^(){
+        NSLog(@"LYSAlphaKeyBord deleteBlock");
+    };
+    _keyborder3.valueChange = ^(NSString * value){
+        NSLog(@"LYSAlphaKeyBord %@",value);
+    };
+    UITextField *_txt3 = [[UITextField alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(_txt2.frame) + 10, CGRectGetWidth(self.view.frame) - 40, 40)];
+    _txt3.inputView = _keyborder3;
+    _txt3.placeholder = @"字母键盘";
+    //_txt.delegate = self;
+    [self.view addSubview:_txt3];
     // Do any additiona l setup after loading the view, typically from a nib.
 }
 

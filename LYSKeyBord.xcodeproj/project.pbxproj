@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48512DE21E90DC3000C1D081 /* LYSAlphaKeyBord.m in Sources */ = {isa = PBXBuildFile; fileRef = 48512DE11E90DC3000C1D081 /* LYSAlphaKeyBord.m */; };
 		48C18E701E801A7C00F3352F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C18E6F1E801A7C00F3352F /* main.m */; };
 		48C18E731E801A7C00F3352F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C18E721E801A7C00F3352F /* AppDelegate.m */; };
 		48C18E761E801A7C00F3352F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C18E751E801A7C00F3352F /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48512DE01E90DC3000C1D081 /* LYSAlphaKeyBord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSAlphaKeyBord.h; sourceTree = "<group>"; };
+		48512DE11E90DC3000C1D081 /* LYSAlphaKeyBord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSAlphaKeyBord.m; sourceTree = "<group>"; };
 		48C18E6B1E801A7C00F3352F /* LYSKeyBord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LYSKeyBord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C18E6F1E801A7C00F3352F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		48C18E711E801A7C00F3352F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -28,7 +31,7 @@
 		48C18E7A1E801A7C00F3352F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48C18E7D1E801A7C00F3352F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48C18E7F1E801A7C00F3352F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48F8BFE01E90A7550023233F /* LYSNumPad.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LYSNumPad.bundle; sourceTree = "<group>"; };
+		48F8BFE01E90A7550023233F /* LYSNumPad.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = LYSNumPad.bundle; path = LYSNumPad/LYSNumPad.bundle; sourceTree = "<group>"; };
 		48F8BFE11E90A7550023233F /* LYSNumPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYSNumPad.h; sourceTree = "<group>"; };
 		48F8BFE21E90A7550023233F /* LYSNumPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYSNumPad.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48512DDF1E90DC1100C1D081 /* LYSAlphaKeyBord */ = {
+			isa = PBXGroup;
+			children = (
+				48512DE01E90DC3000C1D081 /* LYSAlphaKeyBord.h */,
+				48512DE11E90DC3000C1D081 /* LYSAlphaKeyBord.m */,
+			);
+			path = LYSAlphaKeyBord;
+			sourceTree = "<group>";
+		};
 		48C18E621E801A7C00F3352F = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +75,8 @@
 		48C18E6D1E801A7C00F3352F /* LYSKeyBord */ = {
 			isa = PBXGroup;
 			children = (
+				48F8BFE01E90A7550023233F /* LYSNumPad.bundle */,
+				48512DDF1E90DC1100C1D081 /* LYSAlphaKeyBord */,
 				48F8BFDF1E90A7550023233F /* LYSNumPad */,
 				48C18E711E801A7C00F3352F /* AppDelegate.h */,
 				48C18E721E801A7C00F3352F /* AppDelegate.m */,
@@ -88,7 +102,6 @@
 		48F8BFDF1E90A7550023233F /* LYSNumPad */ = {
 			isa = PBXGroup;
 			children = (
-				48F8BFE01E90A7550023233F /* LYSNumPad.bundle */,
 				48F8BFE11E90A7550023233F /* LYSNumPad.h */,
 				48F8BFE21E90A7550023233F /* LYSNumPad.m */,
 			);
@@ -169,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48C18E761E801A7C00F3352F /* ViewController.m in Sources */,
+				48512DE21E90DC3000C1D081 /* LYSAlphaKeyBord.m in Sources */,
 				48C18E731E801A7C00F3352F /* AppDelegate.m in Sources */,
 				48C18E701E801A7C00F3352F /* main.m in Sources */,
 				48F8BFE41E90A7550023233F /* LYSNumPad.m in Sources */,

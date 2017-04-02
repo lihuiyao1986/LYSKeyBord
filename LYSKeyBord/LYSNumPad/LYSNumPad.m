@@ -77,12 +77,11 @@
     _leftView = [[UIView alloc]init];
     [self addSubview:_leftView];
     
+    __weak typeof (self) MyWeakSelf = self;
+    
     // 添加item按钮
     [self.items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.titleLabel.font = _keyborderFont;
-        [_btn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"ffffff" alpha:1.0]] forState:UIControlStateNormal];
-        [_btn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"e2e3e5" alpha:1.0]] forState:UIControlStateHighlighted];
+        UIButton *_btn = [MyWeakSelf createBtn];
         _btn.tag = idx;
         if ([obj isEqualToString:@"resign"]) {
             [_btn setImage:[UIImage imageNamed:@"LYSNumPad.bundle/resign.png"] forState:UIControlStateNormal];
@@ -90,34 +89,40 @@
             [_btn setTitle:obj forState:UIControlStateNormal];
             [_btn setTitle:obj forState:UIControlStateHighlighted];
         }
-        [_btn setTitleColor:[self colorWithHexString:@"1686D5" alpha:1.0] forState:UIControlStateHighlighted];
-        [_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_leftView addSubview:_btn];
     }];
     
     // 设置删除按钮
-    _deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _deleteBtn = [self createBtn];
     [_deleteBtn setImage:[UIImage imageNamed:@"LYSNumPad.bundle/delete.png"] forState:UIControlStateNormal];
-    [_deleteBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"ffffff" alpha:1.0]] forState:UIControlStateNormal];
-    [_deleteBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"e2e3e5" alpha:1.0]] forState:UIControlStateHighlighted];
-    [_deleteBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    _deleteBtn.titleLabel.font = _keyborderFont;
-    _deleteBtn.backgroundColor = [UIColor whiteColor];
     [self addSubview:_deleteBtn];
     
     // 设置确认按钮
-    _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _confirmBtn = [self createBtn];
     [_confirmBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"1686D5" alpha:1.0]] forState:UIControlStateNormal];
-    [_confirmBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"1686D5" alpha:0.9]] forState:UIControlStateNormal];
+    [_confirmBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"1686D5" alpha:0.9]] forState:UIControlStateHighlighted];
+    [_confirmBtn setTitleColor:[self colorWithHexString:@"ffffff" alpha:1.0] forState:UIControlStateHighlighted];
+    [_confirmBtn setTitleColor:[self colorWithHexString:@"ffffff" alpha:1.0] forState:UIControlStateNormal];
     [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [_confirmBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    _confirmBtn.titleLabel.font = _keyborderFont;
     [self addSubview:_confirmBtn];
     
     // 通知
     [self addNotificationsObservers];
 }
+
+
+#pragma mark - 创建按钮
+-(UIButton*)createBtn{
+    UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btn.titleLabel.font = _keyborderFont;
+    [_btn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"ffffff" alpha:1.0]] forState:UIControlStateNormal];
+    [_btn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"e2e3e5" alpha:1.0]] forState:UIControlStateHighlighted];
+    [_btn setTitleColor:[self colorWithHexString:@"1686D5" alpha:1.0] forState:UIControlStateHighlighted];
+    [_btn setTitleColor:[self colorWithHexString:@"414141" alpha:1.0] forState:UIControlStateNormal];
+    [_btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    return _btn;
+}
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
