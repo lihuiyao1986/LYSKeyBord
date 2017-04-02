@@ -73,28 +73,22 @@
     // 设置背景颜色
     self.backgroundColor = [self colorWithHexString:@"D2D2D2" alpha:1.0];
     
-    // 计算出每个键盘item的高度和宽度
-    CGFloat itemW = CGRectGetWidth(self.frame) / COLUMN;
-    CGFloat itemH = CGRectGetHeight(self.frame) / ROW;
-    
     // 左边视图
-    _leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, itemW * (COLUMN - 1), itemH * ROW)];
+    _leftView = [[UIView alloc]init];
     [self addSubview:_leftView];
     
     // 添加item按钮
     [self.items enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIButton *_btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.frame = CGRectMake((idx % (ROW - 1)) * itemW , (idx / (COLUMN -1)) * itemH + _spacing, itemW - _spacing, itemH - _spacing);
         _btn.titleLabel.font = _keyborderFont;
         [_btn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"ffffff" alpha:1.0]] forState:UIControlStateNormal];
         [_btn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"e2e3e5" alpha:1.0]] forState:UIControlStateHighlighted];
+        _btn.tag = idx;
         if ([obj isEqualToString:@"resign"]) {
             [_btn setImage:[UIImage imageNamed:@"LYSNumPad.bundle/resign.png"] forState:UIControlStateNormal];
-            _btn.tag = 1000 + 100;
         }else{
             [_btn setTitle:obj forState:UIControlStateNormal];
             [_btn setTitle:obj forState:UIControlStateHighlighted];
-            _btn.tag = 1000 + idx;
         }
         [_btn setTitleColor:[self colorWithHexString:@"1686D5" alpha:1.0] forState:UIControlStateHighlighted];
         [_btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -107,11 +101,9 @@
     [_deleteBtn setImage:[UIImage imageNamed:@"LYSNumPad.bundle/delete.png"] forState:UIControlStateNormal];
     [_deleteBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"ffffff" alpha:1.0]] forState:UIControlStateNormal];
     [_deleteBtn setBackgroundImage:[self createImageWithColor:[self colorWithHexString:@"e2e3e5" alpha:1.0]] forState:UIControlStateHighlighted];
-    
     [_deleteBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _deleteBtn.titleLabel.font = _keyborderFont;
     _deleteBtn.backgroundColor = [UIColor whiteColor];
-    _deleteBtn.frame = CGRectMake(CGRectGetMaxX(_leftView.frame), _spacing, itemW , CGRectGetHeight(self.frame) / 2 - _spacing);
     [self addSubview:_deleteBtn];
     
     // 设置确认按钮
@@ -121,11 +113,10 @@
     [_confirmBtn setTitle:@"确定" forState:UIControlStateNormal];
     [_confirmBtn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
     _confirmBtn.titleLabel.font = _keyborderFont;
-    _confirmBtn.frame = CGRectMake(CGRectGetMaxX(_leftView.frame), CGRectGetMaxY(_deleteBtn.frame),itemW , CGRectGetHeight(self.frame) / 2);
     [self addSubview:_confirmBtn];
     
+    // 通知
     [self addNotificationsObservers];
-    
 }
 
 - (void)dealloc {
@@ -264,7 +255,7 @@
     
     if( sender != _confirmBtn && sender != _deleteBtn){
         
-        if (sender.tag == 1100) {
+        if (sender.tag == 11) {
             
             [_textInput resignFirstResponder];
             if (self.resignBlock) {
@@ -389,6 +380,20 @@
             
         }
     }
+}
+
+#pragma mark - 重写layoutSubviews
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    // 计算出每个键盘item的高度和宽度
+    CGFloat itemW = CGRectGetWidth(self.frame) / COLUMN;
+    CGFloat itemH = CGRectGetHeight(self.frame) / ROW;
+    _leftView.frame = CGRectMake(0, 0, itemW * (COLUMN - 1), itemH * ROW);
+    [_leftView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.frame = CGRectMake((idx % (ROW - 1)) * itemW , (idx / (COLUMN -1)) * itemH + _spacing, itemW - _spacing, itemH - _spacing);
+    }];
+    _deleteBtn.frame = CGRectMake(CGRectGetMaxX(_leftView.frame), _spacing, itemW , CGRectGetHeight(self.frame) / 2 - _spacing);
+    _confirmBtn.frame = CGRectMake(CGRectGetMaxX(_leftView.frame), CGRectGetMaxY(_deleteBtn.frame),itemW , CGRectGetHeight(self.frame) / 2);
 }
 
 
