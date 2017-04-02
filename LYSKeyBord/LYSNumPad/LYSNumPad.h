@@ -10,7 +10,8 @@
 
 typedef NS_ENUM(NSInteger,LYSNumPadStyle){
     DECIMAL,
-    IDCARD
+    IDCARD,
+    DEFAULT
 };
 
 typedef void(^DeleteBlock)();
