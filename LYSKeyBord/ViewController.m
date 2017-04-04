@@ -32,7 +32,7 @@
         NSLog(@"value = %@",value);
     };
     UITextField *_txt = [[UITextField alloc]initWithFrame:CGRectMake(20, 100, CGRectGetWidth(self.view.frame) - 40, 40)];
-    //_txt.inputView = _keyborder;
+    _txt.inputView = _keyborder;
     _txt.placeholder = @"身份证键盘";
     //_txt.delegate = self;
     [self.view addSubview:_txt];
